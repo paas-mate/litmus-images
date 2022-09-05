@@ -29,6 +29,16 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Save curl
         run: docker pull litmuschaos/curl:2.11.0; docker save litmuschaos/curl:2.11.0 -o litmus-curl.tar.gz
+      - name: Save argoexec
+        run: docker pull litmuschaos/argoexec:v3.3.1; docker save litmuschaos/argoexec:v3.3.1 -o litmus-argoexec.tar.gz
+      - name: Save workflow controller
+        run: docker pull litmuschaos/workflow-controller:v3.3.1; docker save litmuschaos/workflow-controller:v3.3.1 -o litmus-workflow-controller.tar.gz
+      - name: Save chaos-operator
+        run: docker pull litmuschaos/chaos-operator:2.11.0; docker save litmuschaos/chaos-operator:2.11.0 -o litmus-chaos-operator.tar.gz
+      - name: Save chaos-exporter
+        run: docker pull litmuschaos/chaos-exporter:2.11.0; docker save litmuschaos/chaos-exporter:2.11.0 -o litmus-chaos-exporter.tar.gz
+      - name: Save chaos-runner
+        run: docker pull litmuschaos/chaos-runner:2.11.0; docker save litmuschaos/chaos-runner:2.11.0 -o litmus-chaos-runner.tar.gz
       - name: Save litmusportal-frontend
         run: docker pull litmuschaos/litmusportal-frontend:2.12.0; docker save litmuschaos/litmusportal-frontend:2.12.0 -o litmusportal-frontend.tar.gz          
       - name: Save limtmusportal-server
@@ -37,6 +47,10 @@ jobs:
         run: docker pull litmuschaos/litmusportal-auth-server:2.12.0; docker save litmuschaos/litmusportal-auth-server:2.12.0 -o litmusportal-auth-server.tar.gz
       - name: Save mongo
         run: docker pull litmuschaos/mongo:4.2.8; docker save litmuschaos/mongo:4.2.8 -o litmus-mongo.tar.gz
+      - name: Save limtmusportal-subscriber
+        run: docker pull litmuschaos/litmusportal-subscriber:2.12.0; docker save litmuschaos/litmusportal-subscriber:2.12.0 -o litmusportal-subscriber.tar.gz
+      - name: Save limtmusportal-event-tracker
+        run: docker pull litmuschaos/litmusportal-event-tracker:2.12.0; docker save litmuschaos/litmusportal-event-tracker:2.12.0 -o litmusportal-event-tracker.tar.gz
       - uses: dev-drprasad/delete-tag-and-release@v0.2.0
         with:
           delete_release: true
@@ -61,8 +75,15 @@ jobs:
           tag_name: latest_docker_image
           files: |
             litmus-curl.tar.gz
+            litmus-argoexec.tar.gz
+            litmus-workflow-controller.tar.gz
+            litmus-chaos-operator.tar.gz
+            litmus-chaos-exporter.tar.gz
+            litmus-chaos-runner.tar.gz
             litmusportal-frontend.tar.gz
             litmusportal-server.tar.gz
+            litmusportal-subscriber.tar.gz
+            litmusportal-event-tracker.tar.gz
             litmusportal-auth-server.tar.gz
             litmus-mongo.tar.gz
           draft: false
