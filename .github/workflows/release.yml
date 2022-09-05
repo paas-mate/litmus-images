@@ -35,6 +35,8 @@ jobs:
         run: docker pull litmuschaos/litmusportal-server:2.12.0; docker save litmuschaos/litmusportal-server:2.12.0 -o litmusportal-server.tar.gz
       - name: Save limtmusportal-auth-server
         run: docker pull litmuschaos/litmusportal-auth-server:2.12.0; docker save litmuschaos/litmusportal-auth-server:2.12.0 -o litmusportal-auth-server.tar.gz
+      - name: Save mongo
+        run: docker pull litmuschaos/mongo:4.2.8; docker save litmuschaos/mongo:4.2.8 -o litmus-mongo.tar.gz
       - uses: dev-drprasad/delete-tag-and-release@v0.2.0
         with:
           delete_release: true
@@ -62,6 +64,7 @@ jobs:
             litmusportal-frontend.tar.gz
             litmusportal-server.tar.gz
             litmusportal-auth-server.tar.gz
+            litmus-mongo.tar.gz
           draft: false
           prerelease: false
         env:
